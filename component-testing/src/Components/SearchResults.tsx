@@ -1,8 +1,8 @@
-import react from 'react'
+
 
 const SearchResults = () => {
     return (
-        <div>hey</div>
+        <div>hey im the search results component</div>
     )
 }
 
