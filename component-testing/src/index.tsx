@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import { AnswersHeadlessProvider } from "@yext/answers-headless-react";
 import {answersSandboxEndpoints} from "./answersConfig"
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Products from './Pages/Products';
+import HelpArticles from './Pages/HelpArticles';
 
 
 ReactDOM.render(
@@ -14,8 +17,13 @@ ReactDOM.render(
     locale="en"
     endpoints={answersSandboxEndpoints}
   >
-
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element={<App/>}/>
+        <Route path="products" element={<Products/>}/>
+        <Route path="helpArticles" element={<HelpArticles/>}/>
+      </Routes>
+    </Router>
   </AnswersHeadlessProvider>
  
   ,
