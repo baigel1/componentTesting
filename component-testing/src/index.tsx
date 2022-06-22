@@ -10,7 +10,7 @@ import HelpArticles from './Pages/HelpArticles';
 
 
 ReactDOM.render(
-
+<React.StrictMode>
   <AnswersHeadlessProvider
     experienceKey="test-experience"
     apiKey="9641a03ad3de221fb9c566b0c9148351"
@@ -25,6 +25,7 @@ ReactDOM.render(
       </Routes>
     </Router>
   </AnswersHeadlessProvider>
+  </React.StrictMode>
  
   ,
 

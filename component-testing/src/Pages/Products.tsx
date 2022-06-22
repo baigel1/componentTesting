@@ -1,18 +1,60 @@
 
-import { VerticalResults, StandardCard, ResultsCount, AlternativeVerticals } from "@yext/answers-react-components";
+import { VerticalResults, StandardCard, ResultsCount, AlternativeVerticals, VerticalLink, UniversalLink, FilterSearch } from "@yext/answers-react-components";
 import ProductCard from "../Cards/ProductCard";
 import SearchHeader from "../Components/SearchHeader";
 import usePageSetupEffect from '../Hooks/search';
-import { useAnswersState } from '@yext/answers-headless-react'
+import { useAnswersState, SearchParameterField } from '@yext/answers-headless-react'
 import NoResults from '../Components/NoResults'
 
 const Products = () => {
     usePageSetupEffect("products");
     const verticalResults = useAnswersState(state => state.vertical.results) || [""];
     console.log(verticalResults)
+
+    function determineIfVerticalOrUniversal(toBeDetermined: VerticalLink|UniversalLink): toBeDetermined is VerticalLink {
+      if((toBeDetermined as VerticalLink).verticalKey){
+        return true
+      }
+      return false
+    }
+
+    const handleReroute = (data:VerticalLink|UniversalLink) => {
+      console.log("data ios", data)
+      let newRoute = ""
+      //this could easily just be an if statement, but for future if there are multiple mappings that need to happen this is how you'd do it
+      const mappedFields:any = {
+        help_articles: "helpArticles"
+      }
+
+      if(determineIfVerticalOrUniversal(data)){
+        
+        const vertical = mappedFields[data.verticalKey] ? mappedFields[data.verticalKey] : data.verticalKey
+        newRoute = `/${vertical}`
+
+      }
+      else {
+        //handle universal case
+      }
+
+      return newRoute
+    }
+
   return (
     <>
       <SearchHeader />
+      <FilterSearch searchFields={[
+        {
+          fieldApiName: "name",
+          entityType: "product"
+          
+        }]} 
+        label="fruit filter"
+        searchOnSelect={true}
+        
+        />
+        
+
+
       {verticalResults.length === 0 ? 
       <>
       <AlternativeVerticals currentVerticalLabel="Products" verticalConfigMap={{
@@ -22,7 +64,9 @@ const Products = () => {
       }}
       customCssClasses={{
           container: "bg-slate-300 mb-0"
-      }}/>
+      }}
+      getSuggestionUrl={handleReroute}
+      />
       <NoResults /> 
       
       </>
