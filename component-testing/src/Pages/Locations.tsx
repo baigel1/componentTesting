@@ -1,13 +1,12 @@
 
-import { VerticalResults, StandardCard, ResultsCount, AlternativeVerticals, VerticalLink, UniversalLink, FilterSearch, StandardFacets, ApplyFiltersButton, DirectAnswer, NumericalFacets } from "@yext/answers-react-components";
-import ProductCard from "../Cards/ProductCard";
+import { VerticalResults, StandardCard, ResultsCount, AlternativeVerticals, VerticalLink, UniversalLink, FilterSearch, StandardFacets, ApplyFiltersButton, DirectAnswer } from "@yext/answers-react-components";
 import SearchHeader from "../Components/SearchHeader";
 import usePageSetupEffect from '../Hooks/search';
 import { useAnswersState, SearchParameterField } from '@yext/answers-headless-react'
 import NoResults from '../Components/NoResults'
 
-const Products = () => {
-    usePageSetupEffect("products");
+const Locations = () => {
+    usePageSetupEffect("locations");
     const verticalResults = useAnswersState(state => state.vertical.results) || [""];
     console.log(verticalResults)
 
@@ -19,7 +18,7 @@ const Products = () => {
     }
 
     const handleReroute = (data:VerticalLink|UniversalLink) => {
-      console.log("data ios", data)
+      console.log("data is", data)
       let newRoute = ""
       //this could easily just be an if statement, but for future if there are multiple mappings that need to happen this is how you'd do it
       const mappedFields:any = {
@@ -42,21 +41,18 @@ const Products = () => {
   return (
     <>
       <SearchHeader />
-      {/* <FilterSearch searchFields={[
+      <FilterSearch searchFields={[
         {
-          fieldApiName: "name",
-          entityType: "product"
+          fieldApiName: "builtin.location",
+          entityType: "location"
           
         }]} 
-        label="fruit filter"
+        label="location filter"
         // searchOnSelect={true}
         
         />
-        <ApplyFiltersButton /> */}
-        <StandardFacets/>
-        <NumericalFacets
-          inputPrefix={<p>$</p>}
-        />
+        <ApplyFiltersButton />
+        {/* <StandardFacets/> */}
 
 
       {verticalResults.length === 0 ? 
@@ -77,31 +73,21 @@ const Products = () => {
       : 
       <>
       <ResultsCount customCssClasses={{resultCountText: "mx-6 text-orange-700 text-lg"}}/>
-      <NumericalFacets/>
-      <DirectAnswer customCssClasses={{ container: "w-4/5" }} />
+      
       <VerticalResults
         displayAllOnNoResults={false}
         customCssClasses={{ results: "text-left grid grid-cols-6 gap-6 mx-6" }}
         CardComponent={({ result }) => {
           return (
-            <ProductCard result={result} fieldMappings={{
-                title: {
-                    apiName: "name",
-                    mappingType: "FIELD"
-                },
-                description: {
-                    apiName: "richTextDescription",
-                    mappingType: "FIELD"
-                },
-                price: {
-                    apiName: "price",
-                    mappingType: "FIELD"
-                },
-                photoGallery: {
-                    apiName: "photoGallery",
-                    mappingType: "FIELD"
-                }
-            }}/>
+            <StandardCard
+              result={result}
+              customCssClasses={{
+                container:
+                  "flex flex-col justify-start rounded-lg mb-4 p-4 shadow-lg bg-white hover:shadow-xl hover:cursor-pointer",
+                header: "text-lg",
+              }}
+            />
+            
           );
         }}
       />
@@ -111,4 +97,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Locations;

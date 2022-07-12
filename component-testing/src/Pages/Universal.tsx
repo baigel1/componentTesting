@@ -1,5 +1,5 @@
 
-import { UniversalResults, StandardCard, StandardSection } from "@yext/answers-react-components";
+import { UniversalResults, StandardCard, StandardSection, DirectAnswer } from "@yext/answers-react-components";
 import { useAnswersState } from '@yext/answers-headless-react'
 import NoResults from "../Components/NoResults";
 
@@ -10,6 +10,7 @@ const Universal = () => {
       
     <div className="flex w-full justify-center items-center">
         {universalResults.length === 0 ? <NoResults /> :null}
+        <DirectAnswer customCssClasses={{ container: "w-4/5" }} />
       <UniversalResults
       customCssClasses={{container: "w-3/5"}}
         verticalConfigMap={{

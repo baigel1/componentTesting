@@ -1,4 +1,4 @@
-import { CardProps} from "@yext/answers-react-components";
+import { CardProps, ThumbsFeedback} from "@yext/answers-react-components";
 import ReactMarkdown from "react-markdown";
 import { FieldData, applyFieldMappings } from "../utils";
 
@@ -44,7 +44,7 @@ const ProductCard = (props: ProductCardProps) => {
         <p>${mappedData.price.value}</p>
         <ReactMarkdown>{markdown}</ReactMarkdown>
       </div>
-      {/* <ThumbsFeedback cssClasses={{thumbsDownIcon: "bg-green-500 w-8 h-8 rotate-180", thumbsUpIcon: "bg-blue-500 w-8 h-8"}} onClick={handleThumbsClick} feedbackText="was this result helpful?"/> */}
+      <ThumbsFeedback cssClasses={{thumbsDownIcon: "bg-green-500 w-8 h-8 rotate-180", thumbsUpIcon: "bg-blue-500 w-8 h-8"}} onClick={handleThumbsClick} feedbackText="was this result helpful?"/>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import {answersSandboxEndpoints} from "./answersConfig"
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Products from './Pages/Products';
 import HelpArticles from './Pages/HelpArticles';
+import Locations from './Pages/Locations'
 
 
 ReactDOM.render(
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Route path="/" element={<App/>}/>
         <Route path="products" element={<Products/>}/>
         <Route path="helpArticles" element={<HelpArticles/>}/>
+        <Route path="locations" element={<Locations/>}/>
       </Routes>
     </Router>
   </AnswersHeadlessProvider>

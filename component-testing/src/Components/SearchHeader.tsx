@@ -1,6 +1,7 @@
 
 import { DropdownItem, SearchBar, RenderEntityPreviews } from "@yext/answers-react-components";
 import { Link, useResolvedPath, useMatch, LinkProps } from "react-router-dom";
+import '@yext/answers-react-components/bundle.css'
 
 
 const CustomLink = ({children, to, ...props}: LinkProps) => {
@@ -44,6 +45,7 @@ const renderEntityPreview = () => {
           <CustomLink to="/">All</CustomLink>
           <CustomLink to="/products">Products</CustomLink>
           <CustomLink to="/helpArticles">Help Articles</CustomLink>
+          <CustomLink to="/locations">Locations</CustomLink>
         </div>
         {/* <DropdownItem value={"raspberries"} className={"bg-red-500 text-green-500"}/>
           
